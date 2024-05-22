@@ -185,4 +185,86 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+/* start de filtre */
+.filtre{
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	padding: 15px 10px 25px;
 
+}
+.filtre span{
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	border-radius: 25px;
+	padding: 5px 10px;
+	margin: 10px;
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: 0.5s;
+}
+.filtre span:hover{
+	background-color:#1D6154 ;
+	color: white;
+	border: 1px solid #ffffff;
+
+}
+.filtre .active{
+	background-color: #1D6154;
+	color: white;
+	border-radius: 25px;
+	padding: 5px 20px;
+	margin: 10px;
+	cursor: pointer;
+
+}
+/* fin de filtre */
+/* start de modale inscription */
+.modaleDeLogin{
+	display: none;
+	justify-content: center;
+	align-items: center;
+	 gap: 50px;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	border:1px solid #1D6154;
+}
+.modaleDeLogin form{
+	display: flex;
+	flex-direction: column;
+	background-color: #FFFEF8;
+}
+.modaleDeLogin form label{
+	margin-bottom: 10px;
+	background-color: #ffffff;
+	max-width: 379px;
+	max-height: 51px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #3D3D3D;
+}
+.modaleDeLogin form input{
+	margin-bottom: 25px;
+	background-color: #ffffff;
+	max-width: 379px;
+	max-height: 51px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #3D3D3D;
+}
+.modaleDeLogin form button{
+	background-color: #1D6154;
+	color: white;
+	border-radius: 25px;
+	margin: 50px  ;
+	padding: 5px 35px;
+	font-size: 16px;
+	font-weight: 700;
+}
+.modaleDeLogin a{
+	color: #3D3D3D;
+	margin-top: -50px;
+}
+/* fin de modale inscription */
