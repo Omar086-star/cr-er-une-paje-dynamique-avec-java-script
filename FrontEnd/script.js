@@ -161,8 +161,25 @@ dataDeDiv.forEach(figure => rendrePhoto(figure.src, figure.alt, figure.caption))
 
 // requeperer fin les photos de gallery dynamiquement par js
 
+// requeperer start la footer par js
 
+function ajouterFooter(){
+    const footer = document.createElement('footer');
+    const nav = document.createElement('nav');
+    const ul = document.createElement('ul');
+    const li = document.createElement('li');
 
+    li.innerText='Mentions Légales';
+
+    ul.appendChild(li);
+    nav.appendChild(ul);
+    footer.appendChild(nav);  
+
+document.body.appendChild(footer);
+}
+ajouterFooter()
+
+// requeperer fin la footer par js
 
 
 

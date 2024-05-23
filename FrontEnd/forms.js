@@ -1,4 +1,6 @@
 
+// requeperer start la form de contact dynamiquement
+
 function creerFormContact() {
     document.addEventListener("DOMContentLoaded", function() {
         // Ajouter le titre et le paragraphe de contact
@@ -76,10 +78,61 @@ function creerFormContact() {
         }
     });
 }
-
 creerFormContact();
 
+// requeperer fin la form de contact dynamiquement
 
+
+
+
+// requeperer start la form d'inscrption dynamiquement
+
+function creerFormInscription(){
+    document.addEventListener('DOMContentLoaded', function(){
+        const modaleDeLogin = document.querySelector('.modaleDeLogin');
+        const titleDeLogin = document.createElement('h2');
+        titleDeLogin.classList.add('titleDeLogin');
+        titleDeLogin.innerText='Log In';
+        modaleDeLogin.appendChild(titleDeLogin);
+
+        const formModale = document.createElement('form');
+        formModale.setAttribute('action','#');
+        formModale.setAttribute('method','post');
+        formModale.setAttribute('id','formModale');
+        modaleDeLogin.appendChild(formModale);
+
+const label = document.createElement('label');
+label.setAttribute('for','email');
+label.textContent='E-mail';
+formModale.appendChild(label);
+
+const input = document.createElement('input');
+input.setAttribute('type','email');
+input.setAttribute('name','email');
+formModale.appendChild(input);
+
+const labelP = document.createElement('label');
+labelP.setAttribute('for','password');
+labelP.textContent='Password';
+formModale.appendChild(labelP);
+
+const inputP = document.createElement('input');
+inputP.setAttribute('type','password');
+inputP.setAttribute('name','password');
+formModale.appendChild(inputP);
+
+const button= document.createElement('button');
+button.textContent='Se contacter';
+formModale.appendChild(button);
+
+const a =document.createElement('a');
+a.href("#");
+a.textContent='Mot de passe oublié';
+modaleDeLogin.appendChild(a);
+    })
+}
+creerFormInscription()
+// requeperer fin la form d'inscrption dynamiquement
 
 
 
