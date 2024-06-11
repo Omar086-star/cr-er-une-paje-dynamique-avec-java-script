@@ -1,143 +1,50 @@
-function getGalleryProjet (){
-    fetch('http://localhost:5678/api/works')
-    .then(resp => resp.json() )
-    .then(json=>rendreProjet(json)) 
-}
-getGalleryProjet();
+// import('form.js');
+update();
+async function getGalleryProjets (){
+console.log(window.localStorage.getItem("userToken"))
 
-// ajouter le code dynamiquement de HTML  header + nav
-
-function rendreDonnes(){    
-    const head = document.querySelector('.head');
+   var obj = []; 
     
-    const header = document.createElement("header");
-    head.appendChild(header);
-
-    const h1= document.createElement("h1");
-    h1.innerText=`${"Sophie Bluel"} `;
-    header.appendChild(h1);
-    const nav = document.createElement("nav");
-    header.appendChild(nav);
+   const response = await fetch('http://localhost:5678/api/works')
+   const result =  await response.json()
+//    response => response.json();
+//     // obj = JSON.parse(response.text());
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok ' + response.statusText);
+//         }
+        return result ;
     
-    const ul = document.createElement("ul");
-    nav.appendChild(ul);
-    
-    const donnees=[ 
-        { type: 'text', content: 'projets' },
-        { type: 'text', content: 'contact' },
-        { type: 'text', content: 'login' },
-        { type: 'img', content: './assets/icons/instagram.png' ,alt:'Instagram' }
-    ];
-    
-    donnees.forEach(donnee=>{
-    const li = document.createElement("li");
-    if(donnee.type==='text'){
-        li.innerText = donnee.content
-    } else if(donnee.type==='img')  {
-        const img = document.createElement("img");
-    img.src=donnee.content;
-    img.alt=donnee.alt;
-    li.appendChild(img);
     }
-    ul.appendChild(li);
-    
-        });
+
+function update(){
+    const clickLogInHead= document.getElementById('click-login');
+    if(window.localStorage.getItem("userToken")){
+      clickLogInHead.innerText='logout';  
+      
+      const filtreVide=document.getElementById('filtreVide');
+      filtreVide.classList.toggle('hidden');
+            filtreVide.textContent='';
+const divPro = document.getElementById('divPro');
+divPro.style.display= 'contents'
+    //   const contrPro = document.querySelector('.butt');
+    //   filtreVide.style.visibility('hidden');
+      }else{
+clickLogInHead.innerText='login';  
+
     }
-    rendreDonnes()
-
-
-// ajouter le code dynamiquement de HTML  header + nav
-
-// ajouter start l'introduction photo h2 3 paragraph
-
-function rendreIntroduction(){
-    const introduction = document.getElementById("introduction");
-    const figure=document.createElement("figure");
-    introduction.appendChild(figure);
-    const img = document.createElement("img");
-    img.src='./assets/images/sophie-bluel.png';
-    figure.appendChild(img);
+clickLogInHead.addEventListener('click', ()=>{
+  
+window.localStorage.removeItem("userToken");
+ console.log(window.localStorage.getItem("userToken"));
+ window.location.href='login.html'
+    
+})
 }
-rendreIntroduction()
-
-const texts = [
-    { type: 'heading', content: "Designer d'espace" },
-    { type: 'paragraph', content: "Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier." },
-    { type: 'paragraph', content: "Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget." },
-    { type: 'paragraph', content: "En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)" }
-];
-
-function rendreArticle() {
-    const introduction = document.getElementById("introduction");
-    const article = document.createElement("article");
-    introduction.appendChild(article);
-    
-    texts.forEach(text => {
-        if (text.type === 'heading') {
-            const h2 = document.createElement("h2");
-            h2.textContent = text.content;
-            article.appendChild(h2);
-        } else if (text.type === 'paragraph') {
-            const p = document.createElement("p");
-            p.textContent = text.content;
-            article.appendChild(p);
-        }
-    });
-}
-
-rendreArticle();
-// ajouter fin l'introduction photo h2 3 paragraph
-
-// requeperer start les photos de gallery dynamiquement par js
-const dataDeDiv= [
-    { src: "assets/images/abajour-tahina.png",
-         alt: "Abajour Tahina", 
-         caption: "Abajour Tahin" },
-    
-        { src: 'assets/images/appartement-paris-v.png',
-         alt: 'Appartement Paris V', 
-         caption: 'Appartement Paris V' },
-    
-        { src: 'assets/images/restaurant-sushisen-londres.png',
-         alt: 'Restaurant Sushisen - Londres',
-          caption: 'Restaurant Sushisen - Londres' },
-    
-        { src: 'assets/images/la-balisiere.png', 
-        alt: 'Villa “La Balisiere” - Port Louis', 
-        caption: 'Villa “La Balisiere” - Port Louis' },
-    
-        { src: 'assets/images/structures-thermopolis.png', 
-        alt: 'Structures Thermopolis', 
-        caption: 'Structures Thermopolis' },
-    
-        { src: 'assets/images/appartement-paris-x.png',
-         alt: 'Appartement Paris X', 
-         caption: 'Appartement Paris X' },
-    
-        { src: 'assets/images/le-coteau-cassis.png', 
-        alt: 'Pavillon “Le coteau” - Cassis', 
-        caption: 'Pavillon “Le coteau” - Cassis' },
-    
-        { src: 'assets/images/villa-ferneze.png', 
-        alt: 'Villa Ferneze - Isola d’Elba', 
-        caption: 'Villa Ferneze - Isola d’Elba' },
-    
-        { src: 'assets/images/appartement-paris-xviii.png', 
-        alt: 'Appartement Paris XVIII', 
-        caption: 'Appartement Paris XVIII' },
-    
-        { src: 'assets/images/bar-lullaby-paris.png', 
-        alt: 'Bar “Lullaby” - Paris', 
-        caption: 'Bar “Lullaby” - Paris' },
-    
-        { src: 'assets/images/hotel-first-arte-new-delhi.png', 
-        alt: 'Hotel First Arte - New Delhi', 
-        caption: 'Hotel First Arte - New Delhi' }
-    
-    ];
 
 function rendrePhoto(src, alt, caption) {
+    const gallery = document.getElementById("gallery");
     const figure = document.createElement("figure");
+
     const img = document.createElement("img");
     const figcaption = document.createElement("figcaption");
 
@@ -147,49 +54,173 @@ function rendrePhoto(src, alt, caption) {
 
     figure.appendChild(img);
     figure.appendChild(figcaption);
-
-    const gallery = document.querySelector(".gallery");
     gallery.appendChild(figure);
 }
+// dataDeDivs.forEach(figure => rendrePhoto(figure.src, figure.alt, figure.caption));
 
-const portfolio = document.getElementById('portfolio');
-const h2Projet = document.createElement("h2");
-h2Projet.innerText = "Mes Projets";
-portfolio.prepend(h2Projet);
 
-dataDeDiv.forEach(figure => rendrePhoto(figure.src, figure.alt, figure.caption));
-
-// requeperer fin les photos de gallery dynamiquement par js
-
-// requeperer start la footer par js
-
-function ajouterFooter(){
-    const footer = document.createElement('footer');
-    const nav = document.createElement('nav');
-    const ul = document.createElement('ul');
-    const li = document.createElement('li');
-
-    li.innerText='Mentions Légales';
-
-    ul.appendChild(li);
-    nav.appendChild(ul);
-    footer.appendChild(nav);  
-
-document.body.appendChild(footer);
+async function getCategorys(){
+const response = await fetch("http://localhost:5678/api/categories");
+return await response.json();
 }
-ajouterFooter()
+getCategorys()
 
-// requeperer fin la footer par js
+async function afficherProjets(projets){
+const gallery = document.getElementById('gallery');
+const portfolio = document.getElementById('portfolio')
+portfolio.appendChild(gallery)
+gallery.innerHTML='';
+
+// projets.forEach(projet=>rendrePhoto(projet.src , projet.alt , projet.caption ));
+};
+
+function filtreProjets() {
+getGalleryProjets().then(result=>{
+const m = result;
+const toBack = m.filter(test=> test.categoryId !== 0);
+toBack.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.title ));
+
+    const buttons = document.querySelectorAll('.filtre button');
+
+buttons.forEach(button =>{ 
+button.addEventListener('click', (event)=>{
+
+event.preventDefault();
+const categoryId = button.id;
+var rendre= result;
+if(categoryId ==="0" ){
+const rendre = m.filter(test=> test.categoryId !== 0);
+
+afficherProjets(result);
+console.log("aller");
+
+console.log(result);
+
+rendre.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.title ));
+
+}else{
+const rendre1 = m.filter(test=> test.categoryId === Number(categoryId));
+afficherProjets(m);
+console.log(categoryId);
+
+console.log(m.filter(test=> test.categoryId=== Number(categoryId)));
+
+rendre1.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.title ));
+
+}
+
+} ) });
+
+
+} ) }
+
+filtreProjets();
+
+
+
+
+
+// function viderAfficher(){
+
+//     const filtreVide=document.getElementById('filtreVide');
+//     filtreVide.style.display('none');
+
+// const title= document.querySelector('.sujet');
+// const icoPro=document.createElement('i');
+// icoPro.classList.add('fa-regular ',' fa-pen-to-square',' disIn')
+// title.appendChild(icoPro);
+
+// const spanPro=document.createElement('span');
+// spanPro.classList.add('disIn', 'c1D6154',' fs-14'); 
+// spanPro.innerText='modifier'
+// title.appendChild(spanPro);
+
+// };
 
 
 
 
 
 
+// function DataForm(){
+// if(data.token.ok){
+//     // console.log("Connected", data);
+//     // localStorage.setItem("userToken", data.token);
+//     // window.location.href = "index.html"; // Redirect to the desired page
+//     window.sessionStorage.loged=true;
+//     const loginBtn = document.querySelector('.login-button');
+//     let loginHead = document.getElementById('click-login');
+
+// loginBtn.addEventListener("change", function () {
+// loginHead.innerText = 'Logout';
+// viderAfficher()
+//     });
+//     loginHead.addEventListener("click", () => {
+//         window.sessionStorage.loged = false;
+//       });
+
+//     // Update the login section
+//     const sectionLogin = document.querySelector('.login');
+//     sectionLogin.innerHTML = "<p>Vous êtes déjà connecté</p>";
+// }
+// }
+// DataForm()
+
+
+// 
 
 
 
+// function checkLoginStatus() {
+//     const loged = window.sessionStorage.getItem("loged") === "true";
+//     const loginHead = document.getElementById('click-login');
+//     const sectionLogin = document.querySelector('.login');
 
+//     if (loged) {
+//         loginHead.innerText = 'Logout';
+//         loginHead.addEventListener("click", () => {
+//             window.sessionStorage.removeItem("loged");
+//             localStorage.removeItem("userToken");
+//             window.location.reload(); // Reload the page to reflect the logout
+//         });
+//         sectionLogin.innerHTML = "<p>Vous êtes déjà connecté</p>";
+//     }
+// }
 
+// // Function to replace filters with icon and span
+// function viderAfficher() {
+//     const filtreVide = document.getElementById('filtreVide');
+//     filtreVide.innerHTML = '';
 
+//     const title = document.querySelector('.sujet');
 
+//     const icoPro = document.createElement('i');
+//     icoPro.classList.add('fa-regular', 'fa-pen-to-square', 'disIn');
+//     title.appendChild(icoPro);
+
+//     const spanPro = document.createElement('span');
+//     spanPro.classList.add('disIn', 'c1D6154', 'fs-14');
+//     spanPro.innerText = 'modifier';
+//     title.appendChild(spanPro);
+// }
+
+// // Function to handle data form logic
+// function DataForm() {
+//     const loginBtn = document.querySelector('.login-button');
+//     let loginHead = document.getElementById('click-login');
+
+//     loginHead.innerText = 'Logout';
+//     loginBtn.addEventListener("click", () => {
+//         window.sessionStorage.removeItem("loged");
+//         localStorage.removeItem("userToken");
+//         window.location.reload(); // Reload the page to reflect the logout
+//     });
+
+//     // Update the login section
+//     const sectionLogin = document.querySelector('.login');
+//     sectionLogin.innerHTML = "<p>Vous êtes déjà connecté</p>";
+//     viderAfficher();
+// }
+
+// // Call the function to check login status on page load
+// checkLoginStatus();
