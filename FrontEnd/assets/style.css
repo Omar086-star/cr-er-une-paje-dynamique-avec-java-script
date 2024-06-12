@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	position: relative;
 	line-height: 1;
 }
 ol, ul {
@@ -258,6 +259,73 @@ footer nav ul {
 
 }
 /* fin de filtre */
+/* start de modale */
+ .pourModifier{
+	cursor: pointer;
+	
+}
+body .modale{
+	display: flex;
+  position: fixed;
+  left: 0;
+  top: 0%;
+  background-color: #0000002d;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+ 	 text-align: center;
+}
+body .modale .contentModale{
+	width: 50%;
+	height: 80vh;
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	justify-content: space-around;
+	align-items: center;
+	display: flex;
+ 	flex-direction: column;
+ 
+	 }
+.hebergIconX{
+position: relative;
+width: 100%;
+} 
+.fa-xmark{
+position: absolute;
+top: 10px;
+right: 10px;
+font-style: 13px;
+color: #000000;
+}
+.titleModale{
+	font-size: 26px;
+	font-weight: 400;
+ }
+ .miniGallery{
+	display: flex;
+	gap: 5px;
+	flex-wrap: wrap;
+	margin:  0;
+	padding: 10px 20px;
+ }
+.buttonModale{
+background-color:#1D6154;
+border-radius: 60px;
+Width:237px;
+Height:36px;
+color: #ffffff;
+font-size: 14px;
+font-weight: 700;
+cursor: pointer;
+}
+/* .spanSuprim{
+	width: 50px;
+	color: red;
+} */
+/* fin de modale */
+
 /* start de modale inscription */
 .modaleDeLogin{
 	display: flex;

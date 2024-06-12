@@ -117,10 +117,119 @@ rendre1.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.titl
 filtreProjets();
 
 
+function clickModifier(){
+    const proClick=document.querySelector('.pourModifier');
+    const modale=document.querySelector('.modale')
+    const cancel = document.querySelector('.fa-xmark');
+
+    proClick.addEventListener('click',()=>{ 
+modale.style.display='block'
+    })
+    cancel.addEventListener('click',()=>{ 
+        modale.style.display='none'
+            })  
+}
+clickModifier()
+
+async function rendreMiniGallery() {
+    const miniGallery = document.querySelector(".miniGallery");
+    miniGallery.innerHTML = '';
+
+    const mini = await getGalleryProjets();
+    mini.forEach(projet => {
+        var figure = document.createElement("figure");
+        var img = document.createElement("img");   
+        var span = document.createElement("span");
+        var suppr = document.createElement("i");
+        suppr.id = projet.id;
+// console.log(projet.id)
+        // Ajout des classes
+        span.classList.add('spanSuprim');
+        suppr.classList.add('fa-regular', 'fa-trash-can');
+
+        // Style de l'image
+        img.style.width = '76px';
+        img.style.height = '102px';
+
+        // Style de la figure
+        figure.style.width = '87px';
+        figure.style.height = '130px';
+        figure.style.position = 'relative'; // Pour que le span soit positionné correctement
+
+        // Style du bouton de suppression
+        suppr.style.color = '#ffffff';
+        suppr.style.fontSize = '9px';
+        suppr.style.position = 'absolute';
+        suppr.style.top = '3px';
+        suppr.style.right = '3px';
+
+        // Style du span
+        span.style.zIndex = '2';
+        span.style.backgroundColor = '#000000';
+        span.style.display = 'flex';
+        span.style.width = '15px';
+        span.style.height = '15px'; // Ajouter une hauteur pour que le span soit visible
+        span.style.position = 'absolute';
+        span.style.top = '5px';
+        span.style.right = '10px';
+        // Définir la source et l'alt de l'image
+        img.src = projet.imageUrl;
+        img.alt = projet.title;
+
+        // Assembler les éléments
+        span.appendChild(suppr);
+        figure.appendChild(img);
+        figure.appendChild(span);
+        miniGallery.appendChild(figure);
+    });
+    supprimerProjets();
+
+}
+
+rendreMiniGallery();
 
 
+async function supprimerProjets() {  
+       const loged = window.localStorage.getItem("userToken");
+
+ 
+    const supprs = document.querySelectorAll('.fa-trash-can');
+    supprs.forEach(suppr => {    
+        suppr.addEventListener('click', () => {
+            const id = suppr.id;
+            const init = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${loged}`  // Include the token in the header
+                }
+            };
+            
+            fetch('http://localhost:5678/api/works/' + id, init)
+            .then((response) => {
+                if(loged === 'true') {  // Corrected comparison operator
+                    if (!response.ok) {
+                        console.log('Operation n\'a pas été faite');
+                        return response.json();
+                    } else {
+                        console.log('Operation a été faite');
+                        rendreMiniGallery();
+                        getGalleryProjets();
+                    }
+                }
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    });
+}
 
 // function viderAfficher(){
+    // rendre.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.title ));
 
 //     const filtreVide=document.getElementById('filtreVide');
 //     filtreVide.style.display('none');
