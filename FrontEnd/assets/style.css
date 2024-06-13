@@ -265,18 +265,17 @@ footer nav ul {
 	
 }
 body .modale{
-	display: flex;
-  position: fixed;
-  left: 0;
-  top: 0%;
-  background-color: #0000002d;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
- 	 text-align: center;
-}
+display: none;
+position: fixed;
+left: 0;
+top: 0%;
+background-color: #0000002d;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 100vh;
+z-index: 1;
+ }
 body .modale .contentModale{
 	width: 50%;
 	height: 80vh;
@@ -286,12 +285,90 @@ body .modale .contentModale{
 	align-items: center;
 	display: flex;
  	flex-direction: column;
- 
+	position: absolute;
+	translate: 50% 20%;
+ gap: 5px;
 	 }
 .hebergIconX{
 position: relative;
+
 width: 100%;
 } 
+
+#icoLeft{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	color: #000000;
+	font-size: 20px;
+}
+#icoRight{
+	
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	color: #000000;
+	font-size: 20px;
+}
+.formModale{
+	display: flex;
+	width: 80%;
+	height: 80%;
+	gap: 10px;
+	justify-content: center;
+	flex-direction: column;
+}
+.containerModale{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+	border-radius: 5px;
+	margin: 10px auto;
+}
+#labelFile{
+	color:#306685 ;
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	text-align: center;
+	align-items: center;
+/* width: 173px;
+height: 36px; */
+border-radius: 15px;
+padding: 5px 10px;
+}
+.inFile{
+	display: none;
+}
+#megaBite{
+	color: #e70d0d;
+	font-size: 12px;
+}
+.fa-image{
+	font-size: 60px;
+	color: #B9C5CC;
+}
+#megaBite{
+ 	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding:10px;
+}
+
+.buttonModale{
+	background-color: #A7A7A7;
+	cursor: pointer;
+	height: 36px;
+	width: 30%;
+	color: #ffffff;
+	border: none;
+	border-radius: 60px;
+}
+
+
 .fa-xmark{
 position: absolute;
 top: 10px;

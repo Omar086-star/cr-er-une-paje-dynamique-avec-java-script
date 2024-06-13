@@ -188,6 +188,26 @@ async function rendreMiniGallery() {
 
 rendreMiniGallery();
 
+// ajouter des photos
+function displayModaleAjouter(){
+const modaleAjouter = document.getElementById('modaleAjouter');
+const iconLeft = document.getElementById('icoLeft');
+const iconRigt = document.getElementById('icoRight');
+const btnMdlePjt = document.getElementById('buttonModaleProjet');
+
+btnMdlePjt.addEventListener('click', ()=>{
+    modaleAjouter.style.display='block';
+});
+iconLeft.addEventListener('click', ()=>{
+    modaleAjouter.style.display='none';
+});
+iconRigt.addEventListener('click', ()=>{
+    modaleAjouter.style.display='none';
+});
+
+}
+displayModaleAjouter();
+
 
 async function supprimerProjets() {  
        const loged = window.localStorage.getItem("userToken");

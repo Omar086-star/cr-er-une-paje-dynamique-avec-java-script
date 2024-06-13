@@ -139,9 +139,7 @@
 	
 </main>
 
-
-
-
+ 
 <footer>
 	<nav>
 		<ul>
@@ -160,7 +158,35 @@
 			<!-- <div class="box">
  			</div> -->
 		</div>
-		<button class="buttonModale" type="">Ajouter une photo</button>
+		<button id="buttonModaleProjet" class="buttonModale" type="">Ajouter une photo</button>
+	</div>
+</div>
+
+
+<div id="modaleAjouter" class="modale">
+	<div class="contentModale"> 
+ 
+<span> <i id="icoLeft" class="fa-solid fa-arrow-left"></i> </span>
+<span> <i id="icoRight" class="fa-solid fa-xmark"></i> </span>
+<h2 class="titleModale">Ajout Photo</h2>
+<form class="formModale">  
+<div class="containerModale">
+	
+<i class="fa-regular fa-image"></i>
+<label id="labelFile" for="file">+ Ajouter photo</label>
+<input class="inFile" type="file" id="file" name="image">
+<img id="imageModale" src="#" alt="Aperçut de l'image">
+<span id="megaBite">jpg, png : 4 mo max</span>
+</div>
+<label for="title">Titre</label>
+<input type="text" name="title" id="title">
+<label for="category">Catégorie</label>
+<select name="category" id="category"></select>
+<button class="buttonModale" type="">Valider</button>
+			
+	</form>
+
+	 
 	</div>
 </div>
 
