@@ -63,16 +63,16 @@
 </div>
 
 
-<div class="filtre" id="filtreVide">
-<button id="0" class=" butt contrPro active">Tous</button>
-<button id="1"  class="butt contrPro">Objets</button>
-<button id="2" class="butt contrPro">Appartement</button>
-<button id="3" class="butt contrPro">Hotels & Restaurants</button>
+<div class="filtre"  id="filtreVide">
+<button id="0" class=" buttNO    butt contrPro  ">Tous</button>
+<button id="1"  class=" buttNO   butt contrPro">Objets</button>
+<button id="2" class=" buttNO   butt contrPro">Appartement</button>
+<button id="3" class=" buttNO   butt contrPro">Hotels & Restaurants</button>
 </div>		
 		<!--end  ajouter les filtres -->
 
 <!-- code déjà ajouté dynamiquement -->
-	<div id="gallery">
+	<div  class="gallery" id="gallery">
 			<!-- <figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 				<figcaption>Abajour Tahina</figcaption>
@@ -155,8 +155,7 @@
 		</div>
 		<h2 class="titleModale">Galerie Photo</h2>
 		<div class="miniGallery">
-			<!-- <div class="box">
- 			</div> -->
+			 
 		</div>
 		<button id="buttonModaleProjet" class="buttonModale" type="">Ajouter une photo</button>
 	</div>
@@ -169,20 +168,20 @@
 <span> <i id="icoLeft" class="fa-solid fa-arrow-left"></i> </span>
 <span> <i id="icoRight" class="fa-solid fa-xmark"></i> </span>
 <h2 class="titleModale">Ajout Photo</h2>
-<form class="formModale">  
+<form id="formMod" class="formModale">  
 <div class="containerModale">
 	
-<i class="fa-regular fa-image"></i>
-<label id="labelFile" for="file">+ Ajouter photo</label>
+<i id="iconImageFile" class="fa-regular fa-image"></i>
+<label class="labelFilePro" id="labelFile" for="file">+ Ajouter photo</label>
 <input class="inFile" type="file" id="file" name="image">
-<img id="imageModale" src="#" alt="Aperçut de l'image">
+<img id="imageModale" src="#" alt="Aperçut de l'image"> 
 <span id="megaBite">jpg, png : 4 mo max</span>
 </div>
-<label for="title">Titre</label>
+<label class="labelFile" id="labelFile" for="title">Titre</label>
 <input type="text" name="title" id="title">
 <label for="category">Catégorie</label>
-<select name="category" id="category"></select>
-<button class="buttonModale" type="">Valider</button>
+<select class="selected" name="category" id="category"></select>
+<button id="buttonModaleAjout" class="buttonModaleAjout" type="">Valider</button>
 			
 	</form>
 
