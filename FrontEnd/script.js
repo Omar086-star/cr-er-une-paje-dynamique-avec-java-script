@@ -1,4 +1,5 @@
  update();
+ const main = document.querySelector('.main')
 async function getGalleryProjets (){
 console.log(window.localStorage.getItem("userToken"))
 
@@ -6,11 +7,7 @@ console.log(window.localStorage.getItem("userToken"))
     
    const response = await fetch('http://localhost:5678/api/works')
    const result =  await response.json()
-//    response => response.json();
-//     // obj = JSON.parse(response.text());
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok ' + response.statusText);
-//         }
+ 
         return result ;
     
     }
@@ -21,8 +18,9 @@ function update(){
       clickLogInHead.innerText='logout';  
       
       const filtreVide=document.getElementById('filtreVide');
-      filtreVide.classList.toggle('hidden');
-            filtreVide.textContent='';
+   filtreVide.style.display='none' 
+      //   filtreVide.classList.toggle('hidden');
+    //         filtreVide.innerHTML='';
 const divPro = document.getElementById('divPro');
 divPro.style.display= 'contents'
     //   const contrPro = document.querySelector('.butt');
@@ -39,6 +37,13 @@ window.localStorage.removeItem("userToken");
     
 })
 }
+async function displayProjet(){
+    const projets = await getGalleryProjets();
+projets.forEach((projet)=>{
+    rendrePhoto(projet.imageUrl , projet.title  ,projet.title, projet.id) 
+})
+}
+displayProjet();
 
 function rendrePhoto(src, title , projetId) {
     const gallery = document.getElementById("gallery");
@@ -50,12 +55,12 @@ figure.setAttribute('data-id', projetId);
     img.src = src;
     img.alt = title;
     figcaption.innerText = title;
+   
 
     figure.appendChild(img);
     figure.appendChild(figcaption);
     gallery.appendChild(figure);
 }
-// dataDeDivs.forEach(figure => rendrePhoto(figure.src, figure.alt, figure.caption));
 
 
 async function getCategorys(){
@@ -68,77 +73,156 @@ async function afficherProjets(projets){
 const gallery = document.getElementById('gallery');
 const portfolio = document.getElementById('portfolio')
 portfolio.appendChild(gallery)
-gallery.innerHTML='';
+body.innerHTML='';
 
  };
 
- function butColor( ) {
-    const buttons = document.querySelectorAll('.filtre .butt');
-    categoryId=butt.id;
+function butColor() {
+const fil = document.querySelector('.filtre');
+const buttons = document.querySelectorAll('.filtre .contrPro');
 
-buttons.forEach(butt => {
-butt.addEventListener('click', () => {
-    if(bu==='0'){
-        butt.classList.add('active');
-    }else if (categoryId==='1' ){
-        butt.classList.add('active');
-    }else if (categoryId==='2' ){
-        butt.classList.add('active');
-    }else if (categoryId==='3' ){
-        butt.classList.add('active');
-    }
+fil.addEventListener('click', (event) => {
+const filtreId = event.target.id;
+buttons.forEach(button => {
+if (button.id === filtreId) {
+button.classList.add('active');
+} else {
+button.classList.remove('active');
+}
 });
 });
-};
-butColor( );
-
-function filtreProjets() {
-getGalleryProjets().then(result=>{
-const m = result;
-const toBack = m.filter(test=> test.categoryId !== 0);
-toBack.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title  , projet.id));
-
-const buttons = document.querySelectorAll('.filtre button');
-const buttNo = document.querySelector('.butt');
-buttons.forEach(button =>{ 
-button.addEventListener('click', (event)=>{
-
-event.preventDefault();
-const categoryId = button.id;
-var rendre= result;
-if(categoryId ==="0" ){
-const rendre = m.filter(test=> test.categoryId !== 0);
-
- 
-//     } else {
-//     button.classList.remove('active');
-//     button.classList.add('buttNO');
-//     }
-afficherProjets(result);
-console.log("aller");
-  console.log(result);
-
-rendre.forEach(projet=>rendrePhoto(projet.imageUrl ,  projet.title , projet.id));
-
-}else{
-
-const rendre1 = m.filter(test=> test.categoryId === Number(categoryId));
-afficherProjets(m);
-console.log(categoryId);
-
-console.log(m.filter(test=> test.categoryId=== Number(categoryId)));
-
-rendre1.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.title ));
-
 }
 
-} ) });
+butColor();
+ 
+
+async function ajouteButtons(){
+const categorys = await getCategorys();
+categorys.forEach((category)=>{
+
+const filT   = document.querySelector('.filtre');
+const button = document.createElement( 'button');
+button.textContent= category.name;
+button.id = category.id;
+button.classList.add('trier')
+// button.classList.add('filtER')
+filT.appendChild(button)
+
+})
+}
+
+// ajouteButtons();
+
+ 
+async function leFiltre() {
+const ourFiltre = await getGalleryProjets();
+// const newElement = ourFiltre.filter(test => test.categoryId !== 0);
+// newElement.forEach(projet => rendrePhoto(projet.imageUrl, projet.title, projet.id));
+
+const main = document.querySelector('.main');  
+const buttons = document.querySelectorAll(".trier");
+// if (buttons.length === 0) {
+//         console.error("No buttons found. Check the selector or ensure the elements exist in the DOM.");
+//         return;
+//     }
+buttons.forEach((button) => {
+button.addEventListener("click", (e) => {
+e.preventDefault();
+ const buttonId = e.target.id;
+ const categoryId=buttonId
+main.innerHTML = '';  
+
+// if (category.id !==  buttonId[0]){}
+if (categoryId ===  '0') {
+    // const filtered = ourFiltre.filter(test => test.categoryId !== 0);
+    // afficherProjets(filtered);
+    //jusqu'à ici il fonctionne , mais le filtre n'est pas
+
+         // const rendre = m.filter(test=> test.categoryId !== 0);
+        
+        // afficherProjets(result);
+        // console.log("aller");
+        //   console.log(result);
+        
+        
+        // }
+const rendre = ourFiltre.filter((projet =>projet.category.id !== 0)  );
+        afficherProjets(projet);
+        rendre.forEach(projet=>rendrePhoto(projet.imageUrl ,  projet.title , projet.id));
+
+// rendre.forEach((projet) => {
+// (projet.imageUrl, projet.title, projet.id);
+// });
+console.log(buttons);
+console.log('see me for test')
+
+} 
+else {
+   const rendreAu = ourFiltre.filter((projet =>projet.category.id === 0)  );
+        afficherProjets(projet);
+        rendreAu.forEach(projet=>rendrePhoto(projet.imageUrl ,  projet.title , projet.id));
+
+// const filtered = ourFiltre.filter((projet) => {
+// return projet.categoryId = buttonId; 
+// });
+// filtered.forEach((projet) => {
+// rendrePhoto(projet.imageUrl, projet.title, projet.id);
+// });
+    // ourFiltre.forEach((projet) => {
+    //     // console.log(buttons)
+        console.log('see me for test 47') ;
+        rendrePhoto(projet.imageUrl, projet.title, projet.id);
+    // });
+}});
+    });}
+document.addEventListener("DOMContentLoaded", async () => {
+   await ajouteButtons();
+   leFiltre();
+});
+
+// getGalleryProjets().then(result=>{
+// const m = result;
+// const toBack = m.filter(test=> test.categoryId !== 0);
+// toBack.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title  , projet.id));
+
+// const buttons = document.querySelectorAll('.filtre button');
+// const buttNo = document.querySelector('.butt');
+// buttons.forEach(button =>{ 
+// button.addEventListener('click', (event)=>{
+
+// event.preventDefault();
+// const categoryId = button.id;
+
+// var rendre= result;
+
+// if(categoryId ==="0" ){
+// const rendre = m.filter(test=> test.categoryId !== 0);
+
+// afficherProjets(result);
+// console.log("aller");
+//   console.log(result);
+
+// rendre.forEach(projet=>rendrePhoto(projet.imageUrl ,  projet.title , projet.id));
+
+// }else{
+
+// const rendre1 = m.filter(test=> test.categoryId === Number(categoryId));
+// afficherProjets(m);
+// console.log(categoryId);
+
+// console.log(m.filter(test=> test.categoryId=== Number(categoryId)));
+
+// rendre1.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.title ));
+
+// }
+
+// } ) });
 
 
-} ) 
- }
+// } ) 
+//  }
 
-filtreProjets();
+// filtreProjets();
 
 
 function clickModifier(){
@@ -162,6 +246,8 @@ async function rendreMiniGallery() {
     const mini = await getGalleryProjets();
     mini.forEach(projet => {
         var figure = document.createElement("figure");
+        figure.setAttribute('data-id', projet.id);
+
         var img = document.createElement("img");   
         var span = document.createElement("span");
         var suppr = document.createElement("i");
@@ -191,8 +277,9 @@ async function rendreMiniGallery() {
         span.style.zIndex = '2';
         span.style.backgroundColor = '#000000';
         span.style.display = 'flex';
+       
         span.style.width = '15px';
-        span.style.height = '15px'; // Ajouter une hauteur pour que le span soit visible
+        span.style.height = '15px'; 
         span.style.position = 'absolute';
         span.style.top = '5px';
         span.style.right = '10px';
@@ -277,15 +364,20 @@ supprs.forEach(suppr => {
     });
 }
 function supprimerProjet(projetId) {
+    console.log(`Appel de supprimerProjet avec projetId: ${projetId}`);
+
     // Sélectionner tous les éléments de projet sur la page d'accueil et dans la modale
-    const elementsProjet = document.querySelectorAll(`.gallery[data-id='${projetId}'], .contentModale[data-id='${projetId}']`);
-console.log(elementsProjet)
+    const elementsProjet = document.querySelectorAll(`.gallery figure[data-id='${projetId}'], .contentModale figure[data-id='${projetId}']`);
+    
+    console.log(`Elements trouvés avec data-id='${projetId}':`, elementsProjet);
+
     // Parcourir chaque élément trouvé et le supprimer du DOM
     elementsProjet.forEach(element => {
         element.parentNode.removeChild(element);
+        console.log(`Elément supprimé: ${element.outerHTML}`);
     });
-    rendreMiniGallery();
-    getGalleryProjets();
+
+    
 
     console.log(`Les éléments du projet avec l'id ${projetId} ont été supprimés.`);
 }
@@ -308,13 +400,34 @@ inFile.addEventListener('change' , ()=>{
         labelFile.style.display='none'
         iconImageFile.style.display='none'
         megaBite.style.display='none'
- buttonModaleAjout.style.backgroundColor='#1D6154'
- buttonModaleAjout.style.color='#ffffff'
-
-    }
+ 
+}
     reader.readAsDataURL(file);
 });
 
+
+
+// changer le color de button d ajouter
+function clickDeAjoute(){
+    const formMod=document.getElementById('formMod'); 
+    const inFile = document.querySelector('.inFile');
+    const inTitle = document.querySelector('.inTitle');
+    const selected = document.querySelector('.selected');
+    const buttonModaleAjout=document.getElementById('buttonModaleAjout');
+
+    formMod.addEventListener('input', ()=>{
+if(inFile.value!=="" && inTitle.value!=="" && selected.value!=="" ){
+ buttonModaleAjout.style.backgroundColor='#1D6154'
+ buttonModaleAjout.style.color='#ffffff'
+
+}else{
+    // buttonModaleAjout.classList.remove('active');
+
+}
+    })
+
+}
+clickDeAjoute()
 
 // ajouter les options dynamiquement
 async function ajouteOptions(){
@@ -350,11 +463,12 @@ headers: {
  })
 .then(response => response.json())
 
-.then(category => {
-console.log(category);
-console.log('La photo a été ajoutée avec succès', category);
-getGalleryProjets(); 
+.then(projet => {
+console.log(projet);
+console.log('La photo a été ajoutée avec succès', projet);
+getGalleryProjets();
 rendreMiniGallery(); 
+ajouterProjet(projet.id, projet.imageUrl, projet.title , projet.title);
  })
  
 .catch(error => {
@@ -362,121 +476,28 @@ console.error('Erreur:', error);
 });
 });
 
+function ajouterProjet(projetId, imgSrc, imgAlt, figCaption) {
+    // Créer une nouvelle figure
+    const nouvelleFigure = document.createElement('figure');
+    nouvelleFigure.setAttribute('data-id', projetId);
 
- // {
-    //     title:title.value,
-    //     category:category.value,
-    //     imageUrl:imageModale.src,
-    //     category:{
-    //         id:category.value,
-    //         name:category.option[category.selectedIndex].textContent,
-    //     }
-    // }
+    const nouvelleImage = document.createElement('img');
+    nouvelleImage.src = imgSrc;
+    nouvelleImage.alt = imgAlt;
 
+    const nouvelleFigcaption = document.createElement('figcaption');
+    nouvelleFigcaption.textContent = figCaption;
 
+    nouvelleFigure.appendChild(nouvelleImage);
+    nouvelleFigure.appendChild(nouvelleFigcaption);
 
-// function viderAfficher(){
-    // rendre.forEach(projet=>rendrePhoto(projet.imageUrl , projet.title , projet.title ));
+    // Sélectionner les conteneurs où la figure doit être ajoutée
+    const galleries = document.querySelectorAll('.gallery');
 
-//     const filtreVide=document.getElementById('filtreVide');
-//     filtreVide.style.display('none');
+    // Ajouter la nouvelle figure à chaque conteneur
+    galleries.forEach(gallery => {
+        gallery.appendChild(nouvelleFigure.cloneNode(true));
+    });
 
-// const title= document.querySelector('.sujet');
-// const icoPro=document.createElement('i');
-// icoPro.classList.add('fa-regular ',' fa-pen-to-square',' disIn')
-// title.appendChild(icoPro);
-
-// const spanPro=document.createElement('span');
-// spanPro.classList.add('disIn', 'c1D6154',' fs-14'); 
-// spanPro.innerText='modifier'
-// title.appendChild(spanPro);
-
-// };
-
-
-
-
-
-
-// function DataForm(){
-// if(data.token.ok){
-//     // console.log("Connected", data);
-//     // localStorage.setItem("userToken", data.token);
-//     // window.location.href = "index.html"; // Redirect to the desired page
-//     window.sessionStorage.loged=true;
-//     const loginBtn = document.querySelector('.login-button');
-//     let loginHead = document.getElementById('click-login');
-
-// loginBtn.addEventListener("change", function () {
-// loginHead.innerText = 'Logout';
-// viderAfficher()
-//     });
-//     loginHead.addEventListener("click", () => {
-//         window.sessionStorage.loged = false;
-//       });
-
-//     // Update the login section
-//     const sectionLogin = document.querySelector('.login');
-//     sectionLogin.innerHTML = "<p>Vous êtes déjà connecté</p>";
-// }
-// }
-// DataForm()
-
-
-// 
-
-
-
-// function checkLoginStatus() {
-//     const loged = window.sessionStorage.getItem("loged") === "true";
-//     const loginHead = document.getElementById('click-login');
-//     const sectionLogin = document.querySelector('.login');
-
-//     if (loged) {
-//         loginHead.innerText = 'Logout';
-//         loginHead.addEventListener("click", () => {
-//             window.sessionStorage.removeItem("loged");
-//             localStorage.removeItem("userToken");
-//             window.location.reload(); // Reload the page to reflect the logout
-//         });
-//         sectionLogin.innerHTML = "<p>Vous êtes déjà connecté</p>";
-//     }
-// }
-
-// // Function to replace filters with icon and span
-// function viderAfficher() {
-//     const filtreVide = document.getElementById('filtreVide');
-//     filtreVide.innerHTML = '';
-
-//     const title = document.querySelector('.sujet');
-
-//     const icoPro = document.createElement('i');
-//     icoPro.classList.add('fa-regular', 'fa-pen-to-square', 'disIn');
-//     title.appendChild(icoPro);
-
-//     const spanPro = document.createElement('span');
-//     spanPro.classList.add('disIn', 'c1D6154', 'fs-14');
-//     spanPro.innerText = 'modifier';
-//     title.appendChild(spanPro);
-// }
-
-// // Function to handle data form logic
-// function DataForm() {
-//     const loginBtn = document.querySelector('.login-button');
-//     let loginHead = document.getElementById('click-login');
-
-//     loginHead.innerText = 'Logout';
-//     loginBtn.addEventListener("click", () => {
-//         window.sessionStorage.removeItem("loged");
-//         localStorage.removeItem("userToken");
-//         window.location.reload(); // Reload the page to reflect the logout
-//     });
-
-//     // Update the login section
-//     const sectionLogin = document.querySelector('.login');
-//     sectionLogin.innerHTML = "<p>Vous êtes déjà connecté</p>";
-//     viderAfficher();
-// }
-
-// // Call the function to check login status on page load
-// checkLoginStatus();
+    console.log(`Une nouvelle figure avec l'id ${projetId} a été ajoutée.`);
+};

@@ -218,11 +218,21 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+footer{
+	position: relative;
 
+}
 footer nav ul {
 	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+	justify-content:right;
+	align-items: end;
+	margin: 2em;
+	position: relative;
+}
+#Mentions{
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
 }
 /* start de filtre */
 .filtre{
@@ -255,7 +265,11 @@ background-color: #ffffff;
 background-color: #1D6154;
 	color: white;
 }
-.filtre button{
+.remove{
+	background-color: #A7A7A7;
+	color: rgb(67, 67, 67);
+}
+.filtre > button{
 	border-radius: 25px;
 	padding: 5px 20px;
 	margin: 10px;
@@ -289,7 +303,7 @@ height: 100vh;
 z-index: 1;
  }
 body .modale .contentModale{
-	width: 50%;
+	width: 43%;
 	height: 80vh;
 	background-color: #FFFFFF;
 	border-radius: 10px;
@@ -298,7 +312,7 @@ body .modale .contentModale{
 	display: flex;
  	flex-direction: column;
 	position: absolute;
-	translate: 50% 20%;
+	translate: 63% 20%;
  gap: 5px;
 	 }
 .hebergIconX{
@@ -335,7 +349,7 @@ width: 100%;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	width: 420px;
+	width: 67%;
 	height: 169px;
 	background-color: #E8F1F6;
 	border-radius: 5px;
@@ -389,9 +403,9 @@ padding: 5px 10px;
 
 .fa-xmark{
 position: absolute;
-top: 10px;
+top: -25px;
 right: 10px;
-font-style: 13px;
+font-size: 17px;
 color: #000000;
 }
 .titleModale{
@@ -482,6 +496,7 @@ margin: 5px auto;
 }
 
 #messagErreur{
+	/* display: none; */
 	color: red;
 	font-size: 14px;
 }
