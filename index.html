@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
+
+	<link rel="stylesheet" href="./assets/style.css">
+	<!-- <script type=" module" src="forms.js"></script> -->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+	<link rel="icon" href="http://127.0.0.1:5500/favicon.ico">
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	<link rel="shortcut icon" href="favicon/favicon.ico">
+	<link rel="icon" type="image/gif" href="favicon/animated_favicon1.gif">
+	<link rel="icon" type="image/png" href="/somewhere/myicon.png" />
+	<script type=" module" src="forms.js"></script>
+
+	<script type=" module" src="script.js"></script>
+</head>
+
+<body>
+	<div class="modeEdition">
+		<div id="contentEdition">
+
+			<i id="clickableEdition" class="fa-regular fa-pen-to-square "></i>
+			<span id="spanEdition">Mode édition</span>
+
+		</div>
+	</div>
+	<!-- start  header -->
+
+	<header>
+		<h1>Sophie Bluel <button>Architecte d'intérieur</button></h1>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<li><a id="click-login">login</a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- fin  header -->
+
+	<main class="main">
+		<section id="introduction">
+			<figure>
+				<img src="./assets/images/sophie-bluel.png" alt="">
+			</figure>
+			<article>
+				<h2>Designer d'espace</h2>
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
+					finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+					décorateur(trice)</p>
+			</article>
+		</section>
+		<section class="portfolio" id="portfolio">
+			<!--start  ajouter les filtres -->
+			<div class="sujet">
+				<h2 id="titlePro" class=" disIn">Mes Projets</h2>
+				<div id="divPro" class="pro">
+					<i id="pourModifier " class="fa-regular fa-pen-to-square Pro pourModifier"></i>
+					<span class=' .c1D6154 fs-14 Pro  '>modifier</span>
+				</div>
+
+			</div>
+
+			<!--start  ajouter les filtres -->
+
+			<div class="filtre" id="filtreVide">
+				<button id="0" class=" butt contrPro  active">Tous</button>
+
+			</div>
+			<!--end  ajouter les filtres -->
+
+			<!-- code déjà ajouté dynamiquement -->
+			<div class="gallery" id="gallery">
+
+			</div>
+
+		</section>
+
+		<!-- code déjà ajouté dynamiquement -->
+
+		<!-- start section contact -->
+
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="mail" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+		<!-- fin  section contact -->
+
+	</main>
+
+	<!-- fin  main -->
+
+	<!-- start  footer -->
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
+	<!-- fin footer -->
+
+	<!-- start  modale mini gallery -->
+
+	<div class="modale" id="formModale">
+		<div class="contentModale">
+			<div class="hebergIconX">
+				<i class="fa-solid fa-xmark"></i>
+			</div>
+			<h2 class="titleModale">Galerie Photo</h2>
+			<div class="miniGallery">
+
+			</div>
+			<button id="buttonModaleProjet" class="buttonModale" type="">Ajouter une photo</button>
+		</div>
+	</div>
+	<!-- fin    modale mini gallery -->
+
+	<!-- start modale d'ajouter -->
+
+	<div id="modaleAjouter" class="modale">
+		<div class="contentModale">
+
+
+			<form id="formMod" class="formModale">
+				<span> <i id="icoLeft" class="fa-solid fa-arrow-left"></i> </span>
+				<span> <i id="icoRight" class="fa-solid fa-xmark"></i> </span>
+				<h2 id="ajoutPhoto" class="titleModale">Ajout Photo</h2>
+				<div class="containerModale">
+
+					<i id="iconImageFile" class="fa-regular fa-image"></i>
+					<label class="labelFilePro" id="labelFile" for="file">+ Ajouter photo</label>
+					<input class="inFile" type="file" id="file" name="image">
+					<img id="imageModale" src="#" alt="Aperçut de l'image">
+					<span id="megaBite">jpg, png : 4 mo max</span>
+				</div>
+				<label class="  labelChange" id=" " for="title">Titre</label>
+				<input class="inTitle" type="text" name="title" id="title">
+				<label class="labelChange" for="category">Catégorie</label>
+				<select class="selected" name="category" id="category"></select>
+				<button id="buttonModaleAjout" class="buttonModaleAjout" type="">Valider</button>
+
+			</form>
+
+
+		</div>
+	</div>
+	<!-- fin    footer -->
+
+</body>
+
+</html>
