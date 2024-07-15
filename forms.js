@@ -4,7 +4,6 @@ const messageErreur = document.getElementById('messageErreur');
 async function funLog() { 
 
     // Add event listener for form submission
- console.log(window.localStorage.getItem("userToken"));
 
     if( window.localStorage.getItem("userToken") === false){
 const logTest = document.getElementById('click-login');
@@ -30,12 +29,10 @@ const response = await fetch('http://localhost:5678/api/users/login', {
 
             if (response.status === 200) {
                        window.localStorage.setItem("userToken", data.token);
-                        console.log(window.localStorage.getItem("userToken"));
 
                          window.location.href = "index.html"; // Redirect to the desired page
                         // viderAfficher();
                     } else   {
-                        console.log('you see me ?')
                         const messagErreur = document.getElementById('messagErreur');
                         messagErreur.innerText='Votre mail ou mot de passe est inccorect';
                     }
@@ -43,3 +40,28 @@ const response = await fetch('http://localhost:5678/api/users/login', {
 }
 
 funLog();
+
+
+ 
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    function scrollToElementById(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function handleScrollTo() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const scrollToId = urlParams.get('scrollTo');
+        if (scrollToId) {
+            scrollToElementById(scrollToId);
+        }
+    }
+
+    handleScrollTo();
+});
